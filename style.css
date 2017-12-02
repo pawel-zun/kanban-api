@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+html {
+	height: 100%;
+}
+
 body {
+	min-height: 100%;
+	position: relative;
 	font-family: 'Roboto', sans-serif;
 	color: #2c3e50;
 	background-color: #2980b9;
+	background-image: radial-gradient(at top left, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 80%);
 	margin: 0;
-	padding: 0;
+	padding: 20px;
+	box-sizing: border-box;
 }
 
 h1, h2 {
@@ -36,7 +44,7 @@ button:hover {
 	background-color: #ecf0f1;
 	width: 80%;
 	min-width: 750px;
-	margin: 20px auto;
+	margin: 0 auto;
 	padding: 10px;
 }
 
@@ -54,6 +62,7 @@ button:hover {
 	padding: 25px;
 	margin: 10px 10px 10px 0;
 	position: relative;
+  border-radius: 4px;
 }
 
 .column::before {
@@ -96,12 +105,14 @@ button:hover {
 
 .column > .btn-delete, .column > .add-card {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 0;
+	right: 0;
+  border-radius: 0 4px 0 4px;
 }
 
-.column > .btn-delete {
-	right: 105px;
+.column > .add-card {
+	right: 35px;
+  border-radius: 0 0 4px 4px;
 }
 
 .column-card-list {
@@ -120,11 +131,25 @@ button:hover {
 	min-height: 50px;
 	padding: 10px;
 	margin-bottom: 10px;
+  border-radius: 0 4px 0 0;
 }
 
 .column > ul > li > .btn-delete {
-	position: relative;
-	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
+  border-radius: 0 4px 0 4px;
+}
+
+.column > ul > li > .create-column {
+	position: absolute;
+	top: 0;
+	right: 35px;
+  border-radius: 0 0 4px 4px;
+}
+
+.card-description {
+	padding-top: 8px;
 }
 
 .card-placeholder {

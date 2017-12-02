@@ -1,7 +1,7 @@
 function Column(id, name) {
 	var self = this;
 	this.id = id;
-	this.name = name || 'No name given';
+	this.name = name;
 	this.$element = createColumn();
 
 	function createColumn() {
@@ -12,11 +12,12 @@ function Column(id, name) {
 		var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
 
 		$columnDelete.click(function() {
-			self.removeColumn();
+			self.deleteColumn();
 		});
 
-		$columnAddCard.click(function() {
-			var cardName = prompt('Enter the name of the card');
+	$columnAddCard.click(function() {
+		var cardName = prompt('Enter the name of the card');
+		if ((!(cardName == false)) && (!(cardName == null))) {
 			event.preventDefault();
 			$.ajax({
 				url: baseUrl + '/card',
@@ -27,10 +28,13 @@ function Column(id, name) {
 				},
 				success: function(response) {
 					var card = new Card(response.id, cardName);
-					self.createCard(card);
+					self.addCard(card);
 				}
 			});
-		});
+		} else if (cardName == false) {
+			alert('Please write down task description');
+		};
+	});
 
 		$column.append($columnTitle).append($columnDelete).append($columnAddCard).append($columnCardList);
 
@@ -42,13 +46,11 @@ Column.prototype = {
 	addCard: function(card) {
 		this.$element.children('ul').append(card.$element);
 	},
-	removeColumn: function() {
-		this.$element.remove();
-	},
+
 	deleteColumn: function() {
 		var self = this;
 		$.ajax({
-			ulr: baseUrl + '/column/' + self.id,
+			url: baseUrl + '/column/' + self.id,
 			method: 'DELETE',
 			success: function(response) {
 				self.$element.remove();

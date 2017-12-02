@@ -11,14 +11,14 @@ $('.create-column').click(function() {
  	var columnName = prompt('Enter a column name');
  	if ((!(columnName == false)) && (!(columnName == null))) {
     $.ajax({
-      url: baseUrl = '/column',
+      url: baseUrl + '/column',
       method: 'POST',
       data: {
         name: columnName
       },
       success: function(response) {
         var column = new Column(response.id, columnName);
-        board.createColumn(column);  
+        board.addColumn(column);  
       }
     });
   } else if (columnName == false) {
