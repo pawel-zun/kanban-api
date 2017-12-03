@@ -44,11 +44,10 @@ Card.prototype = {
 				url: baseUrl + '/card/' + self.id,
 				method: 'PUT',
 				data: {
-					id: self.id,
 					name: newName,
 					bootcamp_kanban_column_id: $(self.$element).parent().parent().attr('id')
 				},
-				success: function(response) {
+				success: function() {
 					$(self.$element).children('.card-description').text(newName);
 				}
 			});
@@ -56,4 +55,15 @@ Card.prototype = {
 			alert('Please write down task description');
 		}
 	}
-};
+}
+
+function moveItem(itemId, itemName, targetColumnId) {
+  $.ajax({
+    url: baseUrl + '/card/' + self.itemId,
+    method: 'PUT',
+    data: {
+      name: itemName,
+      bootcamp_kanban_column_id: self.targetColumnId
+    }
+ 	});
+}
